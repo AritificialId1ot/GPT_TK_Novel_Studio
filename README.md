@@ -1,92 +1,90 @@
 # Novel Studio GUI v7
 
-AI-assisted novel writing workstation with draft workflow, corpus analysis, and structured prompt assets.
+Novel Studio GUI 是一个用于长篇小说创作的 AI 写作工作台。  
+该软件基于 **Python + Tkinter** 开发，将对话式 AI、结构化草稿流程、写作素材管理和本地语料分析整合到一个统一的写作环境中。
 
-Novel Studio is a desktop writing environment for long-form fiction creation built with Python and Tkinter.  
-It integrates conversational AI, structured drafting workflows, writing assets, and local corpus analysis into a unified writing system.
-
-Unlike typical chat tools, this application organizes writing projects using **sessions, assets, drafts, and corpus references**, allowing long-term writing projects to maintain style consistency and narrative coherence.
+与普通聊天工具不同，本系统将写作组织为 **会话（Session）、素材资产（Assets）、草稿工作区（Draft Workspace）和语料库（Corpus）**，从而支持长期写作项目保持风格一致性和世界观稳定性。
 
 ---
 
-# Features
+# 功能特点
 
-## Conversational Writing
+## 对话式写作
 
-The application provides a persistent conversation interface for interactive writing.
+系统提供持续的对话式写作界面，可用于互动式创作。
 
-Features include:
+主要功能：
 
-- session-based writing projects
-- persistent conversation history
-- AI response generation
-- structured prompt assembly
-- conversation export and import
+- 基于会话的写作项目管理
+- 持久化对话历史
+- AI 自动生成回复
+- 结构化 Prompt 组装
+- 历史记录导入导出
 
-Each message is stored in a database and associated with a specific writing session.
+每一条对话都会存储在数据库中，并与对应写作项目关联。
 
 ---
 
-# Draft Workspace
+# 草稿工作台
 
-The draft workspace implements a structured writing pipeline.
+草稿工作台提供一个完整的结构化写作流程。
 
-The workflow consists of three stages:
+工作流程分为三个阶段：
 
-1. Draft generation
-2. Draft review
-3. Draft revision
+1. 草稿生成
+2. 草稿评审
+3. 草稿改稿
 
-Workspace fields:
+工作区包含以下字段：
 
-| Field | Description |
-|------|-------------|
-| Draft Task | Writing instruction or scene description |
-| Current Draft | Generated draft text |
-| Review Result | AI critique and suggestions |
-| Extra Requirements | Additional revision instructions |
-| Review Prompt Template | Prompt template controlling review behavior |
+| 字段 | 说明 |
+|-----|------|
+| Draft Task | 写作任务或剧情描述 |
+| Current Draft | 当前草稿内容 |
+| Review Result | AI 评审意见 |
+| Extra Requirements | 额外修改要求 |
+| Review Prompt Template | 评审模板 |
 
-Typical workflow:
+典型工作流程：
 
 ```
-Write draft task
-→ Generate draft
-→ Review draft
-→ Add modification instructions
-→ Revise draft
-→ Accept to conversation history
+写草稿任务
+→ 生成草稿
+→ 评审草稿
+→ 添加修改要求
+→ 改稿
+→ 接受草稿到历史记录
 ```
 
-All workspace fields are automatically saved.
+工作区内容会自动保存。
 
 ---
 
-# Asset System
+# 写作素材系统
 
-Writing context is controlled through structured assets.
+写作上下文由结构化素材控制。
 
-Supported asset types:
+支持的素材类型：
 
-| Asset | Purpose |
-|------|--------|
-| Combo | Tag bundles and thematic combinations |
-| Style DNA | Writing style rules |
-| Lexicon | Vocabulary preferences |
-| Bible | Worldbuilding information |
-| Recap | Previous chapter summary |
+| 素材 | 用途 |
+|------|------|
+| Combo | 标签组合和主题组合 |
+| Style DNA | 文风规则 |
+| Lexicon | 词汇偏好 |
+| Bible | 世界观设定 |
+| Recap | 前文剧情总结 |
 
-When enabled, assets are injected into the **system prompt** during generation.
+启用后，这些素材会被加入 **系统提示词（System Prompt）** 中。
 
-This ensures the model respects project-specific style and narrative constraints.
+这样模型生成内容时就会遵循设定好的世界观和风格规则。
 
 ---
 
-# Corpus Analysis
+# 语料库分析
 
-The system supports scanning a local corpus directory.
+系统支持扫描本地语料库目录。
 
-Supported file formats:
+支持的文件格式：
 
 ```
 .txt
@@ -95,34 +93,34 @@ Supported file formats:
 .text
 ```
 
-For each file the system records:
+每个文件会记录以下信息：
 
-- file path
-- modification time
-- file size
-- SHA1 hash
-- inferred tags
-- analysis results
+- 文件路径
+- 修改时间
+- 文件大小
+- SHA1 校验
+- 推断标签
+- 分析结果
 
-All metadata is stored in SQLite.
+这些信息会存储在 SQLite 数据库中。
 
 ---
 
-# Tag Inference
+# 标签推断系统
 
-The corpus scanner includes a built-in tag ontology.
+语料扫描器内置标签体系。
 
-Major tag categories include:
+主要分类包括：
 
-- setting
-- genre
-- content
-- characters
-- body parts
+- 背景
+- 题材
+- 内容
+- 人物
+- 身体部位
 
-Tags are inferred by matching keywords in filenames and text content.
+系统通过匹配文件名和文本内容中的关键词进行标签推断。
 
-Example synonym group:
+示例同义词组：
 
 ```
 tickling
@@ -132,59 +130,59 @@ tickling
 くすぐり
 ```
 
-Detected tags are stored for indexing and analysis.
+推断出的标签可用于语料分析和素材生成。
 
 ---
 
-# Pixiv Tag Discovery
+# Pixiv 标签发现
 
-The system can optionally retrieve related tags from Pixiv.
+系统支持从 Pixiv 获取相关标签。
 
-Process:
+流程如下：
 
-1. map internal tags to Pixiv queries
-2. fetch Pixiv tag pages
-3. extract related tags
-4. identify unknown tags
-5. classify discovered tags
+1. 将内部标签映射为 Pixiv 搜索词
+2. 获取 Pixiv 标签页面
+3. 提取相关标签
+4. 识别未知标签
+5. 分类新标签
 
-This helps expand vocabulary and theme coverage of the corpus.
+该功能可用于扩展语料库的主题和词汇范围。
 
 ---
 
-# Model Routing
+# 模型任务分配
 
-Different tasks use different AI models.
+不同任务使用不同模型。
 
-Default routing:
+默认配置：
 
-| Task | Model |
+| 任务 | 模型 |
 |----|------|
-| Chat | gpt-5-mini |
-| Draft generation | gpt-5.4 |
-| Draft review | gpt-5-mini |
-| Draft revision | gpt-5.4 |
-| Corpus analysis | gpt-5-nano |
+| 对话 | gpt-5-mini |
+| 草稿生成 | gpt-5.4 |
+| 草稿评审 | gpt-5-mini |
+| 草稿改稿 | gpt-5.4 |
+| 语料分析 | gpt-5-nano |
 
-Task-specific routing helps balance cost, speed, and generation quality.
+这种任务级模型分配可以平衡速度、成本和生成质量。
 
 ---
 
-# System Architecture
+# 系统架构
 
-The application follows a three-layer architecture.
+程序采用三层结构：
 
 ```
 run_app.py
       ↓
-GUI Layer (gui_app.py)
+GUI界面层 (gui_app.py)
       ↓
-Backend Layer (core_adapter.py)
+后端服务层 (core_adapter.py)
 ```
 
 ---
 
-# Project Structure
+# 项目结构
 
 ```
 project-root
@@ -197,46 +195,46 @@ project-root
 └── requirements.txt
 ```
 
-Description:
+文件说明：
 
-| File | Description |
-|-----|-------------|
-| run_app.py | Application entry point |
-| gui_app.py | Tkinter graphical interface |
-| core_adapter.py | Backend logic and model interface |
+| 文件 | 说明 |
+|-----|------|
+| run_app.py | 程序入口 |
+| gui_app.py | 图形界面 |
+| core_adapter.py | 后端逻辑 |
 
 ---
 
-# Module Description
+# 模块说明
 
 ## run_app.py
 
-Application entry point.
+程序入口。
 
-Responsibilities:
+功能：
 
-- start the program
-- launch the GUI interface
+- 启动应用
+- 打开 GUI 界面
 
-No business logic is implemented here.
+不包含业务逻辑。
 
 ---
 
 ## gui_app.py
 
-Implements the graphical interface using Tkinter.
+Tkinter 图形界面实现。
 
-Responsibilities include:
+主要功能：
 
-- main window layout
-- session management
-- conversation interface
-- draft workspace interface
-- corpus management interface
-- background task execution
-- progress indicator
+- 主窗口布局
+- 会话管理
+- 对话界面
+- 草稿工作区
+- 语料管理
+- 后台任务执行
+- 进度显示
 
-Main class:
+核心类：
 
 ```
 App
@@ -246,21 +244,21 @@ App
 
 ## core_adapter.py
 
-Backend service layer.
+后端核心服务。
 
-Responsibilities include:
+主要职责：
 
-- database initialization
-- schema migration
-- session storage
-- draft state storage
-- model invocation
-- system prompt construction
-- corpus scanning
-- tag inference
-- Pixiv tag discovery
+- 数据库初始化
+- 数据表升级
+- 会话管理
+- 草稿状态存储
+- 模型调用
+- Prompt 构建
+- 语料扫描
+- 标签推断
+- Pixiv 标签获取
 
-Main backend class:
+核心类：
 
 ```
 BackendService
@@ -268,21 +266,21 @@ BackendService
 
 ---
 
-# Database Design
+# 数据库设计
 
-SQLite database stores all persistent data.
+系统使用 SQLite 存储数据。
 
-Main tables:
+主要数据表：
 
-| Table | Purpose |
-|------|--------|
-| sessions | writing projects and assets |
-| turns | conversation history |
-| draft_states | draft workspace state |
-| corpus_files | indexed corpus files |
-| file_analyses | corpus analysis results |
+| 表 | 说明 |
+|---|------|
+| sessions | 写作项目和素材 |
+| turns | 对话历史 |
+| draft_states | 草稿状态 |
+| corpus_files | 语料文件 |
+| file_analyses | 语料分析 |
 
-Example structure:
+结构示例：
 
 ```
 sessions
@@ -307,11 +305,11 @@ draft_states
 
 ---
 
-# Prompt Construction
+# Prompt 构建
 
-The system prompt is dynamically assembled from enabled assets.
+系统提示词由启用的素材组合生成。
 
-Possible prompt sections:
+可能包含：
 
 ```
 Combo
@@ -319,68 +317,68 @@ Style DNA
 Lexicon
 Bible
 Recap
-Runtime corpus reference
+运行时语料参考
 ```
 
-These sections are concatenated to form the final system prompt.
+这些内容会拼接形成最终 Prompt。
 
 ---
 
-# Token Handling
+# Token 控制策略
 
-To prevent exceeding model limits, the system truncates long inputs.
+为避免超过模型输入限制，系统会截断长文本。
 
-Strategy:
+策略：
 
 ```
-text_head
+文本开头
 ...
-text_tail
+文本结尾
 ```
 
-For message lists:
+对于消息列表：
 
 ```
-system prompt preserved
-latest messages prioritized
-older messages truncated
+保留 system prompt
+优先保留最近消息
+截断旧消息
 ```
 
 ---
 
-# Background Task System
+# 后台任务系统
 
-Long operations run in background threads.
+耗时操作在后台线程执行。
 
-Examples:
+例如：
 
-- model generation
-- corpus scanning
-- tag analysis
+- 模型生成
+- 语料扫描
+- 标签分析
 
-Pipeline:
+执行流程：
 
 ```
-worker thread
+后台线程
 ↓
-result queue
+结果队列
 ↓
-GUI polling
+GUI 轮询
 ```
 
-This prevents the interface from freezing.
+这样可以避免界面卡死。
 
 ---
 
-# Installation
+# 安装
 
-Requirements:
+要求：
 
 ```
 Python 3.9+
 ```
 
-Dependencies:
+依赖库：
 
 ```
 openai
@@ -388,37 +386,37 @@ requests
 beautifulsoup4
 ```
 
-Install dependencies:
+安装：
 
 ```
 pip install openai requests beautifulsoup4
 ```
 
-Tkinter and SQLite are included with standard Python installations.
+Tkinter 和 SQLite 通常随 Python 自带。
 
 ---
 
-# Running the Application
+# 运行程序
 
-Start the program:
+运行：
 
 ```
 python run_app.py
 ```
 
-The GUI interface will launch automatically.
+程序会自动打开 GUI 界面。
 
 ---
 
-# Configuration
+# 配置目录
 
-User configuration is stored in:
+用户配置保存在：
 
 ```
 ~/.novel_studio_gui/
 ```
 
-Example structure:
+结构示例：
 
 ```
 .novel_studio_gui
@@ -426,59 +424,59 @@ Example structure:
  └ train_corpus/
 ```
 
-Database location is determined in the following order:
+数据库路径查找顺序：
 
-1. environment variable `NOVEL_STUDIO_DB`
-2. program directory
-3. working directory
-4. user home directory
-5. fallback database file
-
----
-
-# Typical Workflow
-
-Example writing workflow:
-
-1. create a new session
-2. add worldbuilding assets (Bible, Style DNA, Lexicon)
-3. enable required assets
-4. write a draft task
-5. generate draft
-6. review draft
-7. add revision instructions
-8. revise draft
-9. accept draft into conversation history
+1. 环境变量 `NOVEL_STUDIO_DB`
+2. 程序目录
+3. 当前工作目录
+4. 用户主目录
+5. 默认数据库文件
 
 ---
 
-# Troubleshooting
+# 典型使用流程
 
-## Application does not start
+示例写作流程：
 
-Check Python version:
+1. 创建新会话
+2. 添加世界观素材（Bible / Style DNA / Lexicon）
+3. 启用需要的素材
+4. 编写草稿任务
+5. 生成草稿
+6. 评审草稿
+7. 添加修改要求
+8. 改稿
+9. 接受草稿进入历史记录
+
+---
+
+# 故障排查
+
+## 程序无法启动
+
+检查 Python 版本：
 
 ```
 python --version
 ```
 
-Minimum required version:
+需要：
 
 ```
-Python 3.9
+Python 3.9+
 ```
 
 ---
 
-## Model responses are empty
+## AI 无响应
 
-Possible causes:
+可能原因：
 
-- missing API key
-- network connection issues
-- input exceeding model limits
+- 未配置 API Key
+- 网络问题
+- 输入过长
 
-Set API key:
+设置 API Key：
 
 ```
 export OPENAI_API_KEY=your_key
@@ -486,9 +484,9 @@ export OPENAI_API_KEY=your_key
 
 ---
 
-## Corpus scanning does not detect files
+## 语料扫描无结果
 
-Ensure files are in supported formats:
+确认文件格式：
 
 ```
 .txt
@@ -499,31 +497,31 @@ Ensure files are in supported formats:
 
 ---
 
-# Limitations
+# 当前限制
 
-Current limitations include:
+目前存在的限制：
 
-- progress bar shows activity rather than exact percentage
-- Pixiv scraping depends on page structure
-- Tkinter interface is visually simple
-- very long contexts may be truncated
+- 进度条为活动指示而非精确百分比
+- Pixiv 抓取依赖网页结构
+- Tkinter 界面较为简单
+- 超长上下文会被截断
 
 ---
 
-# Future Improvements
+# 未来计划
 
-Possible upgrades include:
+未来可能增加：
 
-- streaming model responses
-- embedding-based corpus search
-- chapter management system
-- improved GUI framework
-- project packaging and export
+- 模型流式输出
+- 语料 embedding 检索
+- 章节管理系统
+- 更现代的 GUI 框架
+- 项目打包导出
 
 ---
 
 # License
 
-This project is intended for research and creative writing use.
+本项目用于研究和创作用途。
 
-Users must ensure compliance with the terms of service of any AI models used with the software.
+用户需要遵守所使用 AI 模型服务提供商的相关使用条款。
